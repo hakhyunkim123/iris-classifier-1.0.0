@@ -1,0 +1,8 @@
+name: iris-classifier
+version: 1.0.0
+desc: iris classifier
+model:
+  name: iris-classifier
+  version: 1.0.0
+  desc: None
+  module: None

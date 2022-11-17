@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iris-classifier-1.0.0
+  labels:
+    app: iris-classifier-1.0.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iris-classifier-1.0.0
+  template:
+    metadata:
+      labels:
+        app: iris-classifier-1.0.0
+    spec:
+      containers:
+      - name: iris-classifier
+        image: hhkim940/iris-classifier:1.0.0
+        env:
+          - name: SERVICE_NAME
+            value: iris-classifier
+          - name: SERVICE_VERSION
+            value: 1.0.0
+          - name: MODEL_NAME
+            value: iris-classifier
+          - name: MODEL_VERSION
+            value: 1.0.0
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+          - mountPath: /task/models
+            name: model-storage
+            subPath: aiserve/repos/models/iris-classifier/1.0.0
+      volumes:
+        - name: model-storage
+          persistentVolumeClaim:
+            claimName: ai-serving-static-pvc

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: iris-classifier-1.0.0
+spec:
+  selector:
+    app: iris-classifier-1.0.0
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
